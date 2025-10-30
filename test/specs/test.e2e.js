@@ -1,5 +1,5 @@
 import { expect } from '@wdio/globals'
-import LoginPage from '../pageobjects/page.js'
+import LoginPage from '../pageobjects/login.page.js'
 import InventoryPage from '../pageobjects/inventory.page.js'
 
 
@@ -10,34 +10,34 @@ class User {
     }
 }
 const USERS = [
-    User("standard_user", "secret_sauce"),
-    User("locked_out_user", "secret_sauce"),
-    User("problem_user", "secret_sauce"),
-    User("performance_glitch_user", "secret_sauce"),
-    User("error_user", "secret_sauce"),
-    User("visual_user", "secret_sauce"),
+    new User("standard_user", "secret_sauce"),
+    new User("locked_out_user", "secret_sauce"),
+    new User("problem_user", "secret_sauce"),
+    new User("performance_glitch_user", "secret_sauce"),
+    new User("error_user", "secret_sauce"),
+    new User("visual_user", "secret_sauce"),
 ]
 
 describe('Login', () => {
     it('should login with each credentials', async () => {
-        await Page.open()
         for(let user of USERS){
-            await Page.login(user.username, user.password)
+            await LoginPage.open()
+            await LoginPage.login(user.username, user.password)
             switch(user.username) {
                 case "standard_user":
                 case "problem_user":
                 case "performance_glitch_user":
                 case "error_user":
                 case "visual_user":
-                    await expect(InventoryPage).toBeExisting()
-
+                    await expect(InventoryPage.logo).toBeExisting()
+                    break;
                 case "locked_out_user":
                 default:
-                    await expect(Page.loginErrorMessage)
+                    await expect(LoginPage.loginErrorMessage).toBeExisting()
+                    break;
             }
-
+            await browser.reloadSession()
         }
-        await Page.login()
     })
 })
 
