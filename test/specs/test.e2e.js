@@ -1,12 +1,12 @@
 import { expect } from '@wdio/globals'
-import Page from '../pageobjects/page.js'
-import Inventory from '../pageobjects/inventory.page.js'
+import LoginPage from '../pageobjects/page.js'
+import InventoryPage from '../pageobjects/inventory.page.js'
 
 
 class User {
     constructor(username, password) {
-        this.username = username
-        this.password = password
+        this.username = username;
+        this.password = password;
     }
 }
 const USERS = [
@@ -19,10 +19,24 @@ const USERS = [
 ]
 
 describe('Login', () => {
-    it('should login with valid credentials', async () => {
+    it('should login with each credentials', async () => {
         await Page.open()
+        for(let user of USERS){
+            await Page.login(user.username, user.password)
+            switch(user.username) {
+                case "standard_user":
+                case "problem_user":
+                case "performance_glitch_user":
+                case "error_user":
+                case "visual_user":
+                    await expect(InventoryPage).toBeExisting()
 
+                case "locked_out_user":
+                default:
+                    await expect(Page.loginErrorMessage)
+            }
 
+        }
         await Page.login()
     })
 })
