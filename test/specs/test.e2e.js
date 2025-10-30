@@ -20,7 +20,7 @@ const USERS = [
 
 describe('Login', () => {
     it('should login with each credential', async () => {
-        for(let user of USERS){
+        for(let user of USERS) {
             await LoginPage.open()
             await LoginPage.login(user.username, user.password)
             switch(user.username) {
@@ -29,13 +29,14 @@ describe('Login', () => {
                 case "performance_glitch_user":
                 case "error_user":
                 case "visual_user":
-                    await expect(InventoryPage.logo).toBeExisting()
+                    await expect(LoginPage.url).t
                     break;
                 case "locked_out_user":
                 default:
                     await expect(LoginPage.ErrorLoginMessage).toBeExisting()
                     break;
-            }
+                }
+                await expect(InventoryPage.logo).toBeExisting()
             await browser.reloadSession()
         }
     })
