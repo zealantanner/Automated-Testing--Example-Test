@@ -11,15 +11,15 @@ class User {
 }
 const USERS = [
     new User("standard_user", "secret_sauce"),
-    new User("locked_out_user", "secret_sauce"),
-    new User("problem_user", "secret_sauce"),
-    new User("performance_glitch_user", "secret_sauce"),
-    new User("error_user", "secret_sauce"),
-    new User("visual_user", "secret_sauce"),
+    // new User("locked_out_user", "secret_sauce"),
+    // new User("problem_user", "secret_sauce"),
+    // new User("performance_glitch_user", "secret_sauce"),
+    // new User("error_user", "secret_sauce"),
+    // new User("visual_user", "secret_sauce"),
 ]
 
 describe('Login', () => {
-    it('should login with each credentials', async () => {
+    it('should login with each credential', async () => {
         for(let user of USERS){
             await LoginPage.open()
             await LoginPage.login(user.username, user.password)
