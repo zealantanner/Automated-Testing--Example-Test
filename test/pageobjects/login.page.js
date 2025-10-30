@@ -3,21 +3,11 @@ import Page from "../pageobjects/page.js";
 
 
 class LoginPage extends Page {
-
-    get inputUsername() {
-        return $('#user-name')
-    }
-    
-    get inputPassword() {
-        return $('#password')
-    }
-
-    get buttonLogin() {
-        return $('#login-button')
-    }
-
-    get loginErrorMessage() {
-        return $('//*[@data-test="error"]')
+    constructor() {
+        this.inputUsername = $('#user-name')
+        this.inputPassword = $('#password')
+        this.buttonLogin = $('#login-button')
+        this.ErrorLoginMessage = $('//*[@data-test="error"]')
     }
 
 

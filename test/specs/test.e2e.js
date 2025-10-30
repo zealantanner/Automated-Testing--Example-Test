@@ -33,7 +33,7 @@ describe('Login', () => {
                     break;
                 case "locked_out_user":
                 default:
-                    await expect(LoginPage.loginErrorMessage).toBeExisting()
+                    await expect(LoginPage.ErrorLoginMessage).toBeExisting()
                     break;
             }
             await browser.reloadSession()
