@@ -28,6 +28,7 @@ const USERS = [
     new User(randstr(10), randstr(10)),
 ]
 
+
 describe("Login", () => {
     for(const user of USERS) {
         it(`should ${user.isValid ? "allow":"deny"} login for ${user.username}`, async () => {
