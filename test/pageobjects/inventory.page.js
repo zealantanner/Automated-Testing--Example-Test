@@ -1,10 +1,12 @@
-import { $ } from "@wdio/globals";
-import Page from "../pageobjects/page.js"
+import { $, $$ } from "@wdio/globals";
+import Url from "../pageobjects/url.js";
 
-class InventoryPage extends Page {
+class Inventory extends Url {
+    get container() { return $('div#inventory_container') }
+    get items() { return $$('//div[@class="inventory_list"]/*') }
     open() {
         return super.open("inventory.html")
     }
 }
 
-export default new InventoryPage();
+export default new Inventory();
