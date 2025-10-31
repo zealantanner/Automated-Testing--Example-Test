@@ -10,7 +10,9 @@ class User {
         this.isValid = isValid;
     }
 }
+
 const randstr = (length = 5) => Math.random().toString(36).slice(2, 2+length)
+
 const USERS = [
     new User("standard_user", "secret_sauce", true),
     new User("locked_out_user", "secret_sauce", false),
