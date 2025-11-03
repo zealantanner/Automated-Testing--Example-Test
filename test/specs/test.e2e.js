@@ -1,6 +1,6 @@
 import { browser, expect } from '@wdio/globals'
-import Page from '../pageobjects/page.js'
-import Inventory from '../pageobjects/inventory.page.js'
+import Login from '../pageobjects/login.js'
+import Inventory from '../pageobjects/inventory.js'
 
 
 class User {
@@ -31,14 +31,14 @@ const USERS = [
 describe("Login", () => {
     for(const user of USERS) {
         it(`should ${user.isValid ? "allow":"deny"} login for ${user.username}`, async () => {
-            await Page.open()
-            await Page.login(user.username, user.password)
+            await Login.open()
+            await Login.login(user.username, user.password)
             if(user.isValid) {
                 await expect(browser).toHaveUrl(expect.stringContaining("inventory.html"))
                 await expect(Inventory.container).toBeExisting()
             } else {
                 await expect(browser).toHaveUrl(expect.not.stringContaining("inventory.html"))
-                await expect(Page.errorLoginMessage).toBeExisting()
+                await expect(Login.errorLoginMessage).toBeExisting()
             }
         })
     }

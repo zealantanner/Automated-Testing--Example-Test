@@ -1,23 +1,11 @@
-import { $ } from "@wdio/globals";
-import Url from "../pageobjects/url.js";
+import { browser, $ } from "@wdio/globals";
 
 
-class Page extends Url {
-    get loginContainer(){ return $('div.login_container') }
-    get inputUsername(){ return $('#user-name') }
-    get inputPassword(){ return $('#password') }
-    get buttonConfirm(){ return $('#login-button') }
-    get errorLoginMessage() { return $('//*[@data-test="error"]') }
+
+export default class Page {
+    get logo() { return $('//*[contains(@class,"logo") and contains(text(),"Swag Labs")]') }
     
-    async login(username, password) {
-        await this.inputUsername.setValue(username)
-        await this.inputPassword.setValue(password)
-        await this.buttonConfirm.click()
-    }
-    
-    open() {
-        return super.open()
+    open(path="") {
+        return browser.url(`https://www.saucedemo.com/${path}`)
     }
 }
-
-export default new Page();
